@@ -1,7 +1,23 @@
-﻿@page "/"
+@page "/"
+@using GridLab.Services
 
-<PageTitle>Home</PageTitle>
+<PageTitle>FormulaEngine Smoke Test</PageTitle>
 
-<h1>Hello, world!</h1>
+<h2>FormulaEngine Smoke Test</h2>
 
-Welcome to your new app.
+@{
+    var engine = new FormulaEngine();
+    var values = new Dictionary<string, object?>
+    {
+        ["supply"] = 10000.0,
+        ["shrink"] = 200.0
+    };
+
+    var r1 = engine.Evaluate("supply - shrink", values);
+    var r2 = engine.Evaluate("supply - xyz", values);
+    var r3 = engine.Evaluate("shrink / supply", values);
+}
+
+<p>supply - shrink = @(r1.Success ? r1.Value?.ToString() : $"ERROR: {r1.Error}")</p>
+<p>supply - xyz (missing) = @(r2.Success ? r2.Value?.ToString() : $"ERROR: {r2.Error}")</p>
+<p>shrink / supply = @(r3.Success ? r3.Value?.ToString() : $"ERROR: {r3.Error}")</p>
