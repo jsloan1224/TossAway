@@ -1,32 +1,14 @@
 @page "/"
 @using GridLab.Services
-@using GridLab.Templates
+@inject SheetState Sheet
 
-<PageTitle>Smoke Tests</PageTitle>
+<PageTitle>SheetState Smoke Test</PageTitle>
 
-<h2>FormulaEngine</h2>
-@{
-    var engine = new FormulaEngine();
-    var values = new Dictionary<string, object?>
-    {
-        ["supply"] = 10000.0,
-        ["shrink"] = 200.0
-    };
-    var r1 = engine.Evaluate("supply - shrink", values);
-    var r2 = engine.Evaluate("supply - xyz", values);
-    var r3 = engine.Evaluate("shrink / supply", values);
+<h2>SheetState — initial recalc</h2>
+<ul>
+@foreach (var row in Sheet.Rows)
+{
+    var cell = Sheet.Cells[row.RowKey];
+    <li>@row.RowKey: @(cell.Error is not null ? $"ERROR: {cell.Error}" : cell.Value?.ToString())</li>
 }
-<p>supply - shrink = @(r1.Success ? r1.Value?.ToString() : $"ERROR: {r1.Error}")</p>
-<p>supply - xyz (missing) = @(r2.Success ? r2.Value?.ToString() : $"ERROR: {r2.Error}")</p>
-<p>shrink / supply = @(r3.Success ? r3.Value?.ToString() : $"ERROR: {r3.Error}")</p>
-
-<h2>DependencyGraph</h2>
-@{
-    var graph = new DependencyGraph(
-        TemplateRegistry.SupplyPlanMonth,
-        key => TemplateRegistry.SupplyPlanMonth.FirstOrDefault(r => r.RowKey == key)?.DefaultFormula);
-}
-<p>HasCycle: @graph.HasCycle</p>
-<p>Evaluation order: @string.Join(" → ", graph.EvaluationOrder)</p>
-<p>Dependents of supply: @string.Join(", ", graph.GetDependents("supply"))</p>
-<p>Dependents of net_supply: @string.Join(", ", graph.GetDependents("net_supply"))</p>
+</ul>
