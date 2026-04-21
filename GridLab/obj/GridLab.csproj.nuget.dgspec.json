@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danvi\\source\\repos\\tossaway\\GridLab\\GridLab.csproj": {}
+    "C:\\Users\\danvi\\source\\repos\\tossaway\\gridlab\\GridLab.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danvi\\source\\repos\\tossaway\\GridLab\\GridLab.csproj": {
+    "C:\\Users\\danvi\\source\\repos\\tossaway\\gridlab\\GridLab.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danvi\\source\\repos\\tossaway\\GridLab\\GridLab.csproj",
+        "projectUniqueName": "C:\\Users\\danvi\\source\\repos\\tossaway\\gridlab\\GridLab.csproj",
         "projectName": "GridLab",
-        "projectPath": "C:\\Users\\danvi\\source\\repos\\tossaway\\GridLab\\GridLab.csproj",
+        "projectPath": "C:\\Users\\danvi\\source\\repos\\tossaway\\gridlab\\GridLab.csproj",
         "packagesPath": "C:\\Users\\danvi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danvi\\source\\repos\\tossaway\\GridLab\\obj\\",
+        "outputPath": "C:\\Users\\danvi\\source\\repos\\tossaway\\gridlab\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

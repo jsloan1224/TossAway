@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init *)",
+      "Bash(git commit *)",
+      "Bash(dotnet new blazor *)",
+      "Bash(dotnet build *)",
+      "Bash(dotnet run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5000)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://localhost:7000 -k)",
+      "Bash(dotnet add package *)",
+      "Bash(dotnet package search *)",
+      "Bash(dotnet remove *)",
+      "Bash(dotnet add *)",
+      "Bash(git add *)",
+      "Bash(taskkill /F /IM GridLab.exe)",
+      "PowerShell(Stop-Process *)"
+    ]
+  }
+}

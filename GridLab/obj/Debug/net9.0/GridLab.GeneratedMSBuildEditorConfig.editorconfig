@@ -9,49 +9,61 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = GridLab
 build_property.RootNamespace = GridLab
-build_property.ProjectDir = C:\Users\danvi\source\repos\tossaway\GridLab\
+build_property.ProjectDir = C:\Users\danvi\source\repos\tossaway\gridlab\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\danvi\source\repos\tossaway\GridLab
+build_property.MSBuildProjectDirectory = C:\Users\danvi\source\repos\tossaway\gridlab
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/danvi/source/repos/tossaway/GridLab/Components/App.razor]
+[C:/Users/danvi/source/repos/tossaway/gridlab/Components/App.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danvi/source/repos/tossaway/GridLab/Components/Pages/Counter.razor]
+[C:/Users/danvi/source/repos/tossaway/gridlab/Components/Grid/FormulaBar.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xHcmlkXEZvcm11bGFCYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/danvi/source/repos/tossaway/gridlab/Components/Grid/SheetCell.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xHcmlkXFNoZWV0Q2VsbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/danvi/source/repos/tossaway/gridlab/Components/Grid/SheetGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xHcmlkXFNoZWV0R3JpZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/danvi/source/repos/tossaway/gridlab/Components/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danvi/source/repos/tossaway/GridLab/Components/Pages/Error.razor]
+[C:/Users/danvi/source/repos/tossaway/gridlab/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danvi/source/repos/tossaway/GridLab/Components/Pages/Home.razor]
+[C:/Users/danvi/source/repos/tossaway/gridlab/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danvi/source/repos/tossaway/GridLab/Components/Pages/Weather.razor]
+[C:/Users/danvi/source/repos/tossaway/gridlab/Components/Pages/Weather.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXZWF0aGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danvi/source/repos/tossaway/GridLab/Components/Routes.razor]
+[C:/Users/danvi/source/repos/tossaway/gridlab/Components/Routes.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danvi/source/repos/tossaway/GridLab/Components/_Imports.razor]
+[C:/Users/danvi/source/repos/tossaway/gridlab/Components/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danvi/source/repos/tossaway/GridLab/Components/Layout/MainLayout.razor]
+[C:/Users/danvi/source/repos/tossaway/gridlab/Components/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-s9xlsoe7qw
 
-[C:/Users/danvi/source/repos/tossaway/GridLab/Components/Layout/NavMenu.razor]
+[C:/Users/danvi/source/repos/tossaway/gridlab/Components/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-7054z19vhe

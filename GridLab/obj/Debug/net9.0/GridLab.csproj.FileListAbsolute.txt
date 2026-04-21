@@ -20,7 +20,6 @@ C:\Users\danvi\source\repos\tossaway\GridLab\obj\Debug\net9.0\scopedcss\Componen
 C:\Users\danvi\source\repos\tossaway\GridLab\obj\Debug\net9.0\scopedcss\Components\Layout\NavMenu.razor.rz.scp.css
 C:\Users\danvi\source\repos\tossaway\GridLab\obj\Debug\net9.0\scopedcss\bundle\GridLab.styles.css
 C:\Users\danvi\source\repos\tossaway\GridLab\obj\Debug\net9.0\scopedcss\projectbundle\GridLab.bundle.scp.css
-C:\Users\danvi\source\repos\tossaway\GridLab\obj\Debug\net9.0\compressed\snt6qivghn-khy4lop6wu.gz
 C:\Users\danvi\source\repos\tossaway\GridLab\obj\Debug\net9.0\compressed\06j13yk0ka-bqjiyaj88i.gz
 C:\Users\danvi\source\repos\tossaway\GridLab\obj\Debug\net9.0\compressed\4nwea595ir-c2jlpeoesf.gz
 C:\Users\danvi\source\repos\tossaway\GridLab\obj\Debug\net9.0\compressed\vxgcbp6n84-erw9l3u2r3.gz
@@ -102,3 +101,4 @@ C:\Users\danvi\source\repos\tossaway\GridLab\bin\Debug\net9.0\runtimes\browser\l
 C:\Users\danvi\source\repos\tossaway\GridLab\bin\Debug\net9.0\runtimes\win\lib\net9.0\System.Text.Encodings.Web.dll
 C:\Users\danvi\source\repos\tossaway\GridLab\obj\Debug\net9.0\GridLab.csproj.AssemblyReference.cache
 C:\Users\danvi\source\repos\tossaway\GridLab\obj\Debug\net9.0\GridLab.csproj.Up2Date
+C:\Users\danvi\source\repos\tossaway\GridLab\obj\Debug\net9.0\compressed\snt6qivghn-z69q1jitmq.gz
