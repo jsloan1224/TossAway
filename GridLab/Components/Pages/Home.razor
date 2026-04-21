@@ -3,15 +3,25 @@
 @using GridLab.Services
 @using GridLab.Components.Grid
 @inject SheetState Sheet
+@implements IDisposable
 
 <PageTitle>GridLab</PageTitle>
 
 <div class="sheet-container">
     <SheetGrid Sheet="Sheet"
                SelectedRowKey="_selectedRowKey"
-               OnSelectRow="@(key => _selectedRowKey = key)" />
+               OnSelectRow="@(key => { _selectedRowKey = key; StateHasChanged(); })" />
 </div>
 
 @code {
     private string? _selectedRowKey;
+
+    protected override void OnInitialized()
+    {
+        Sheet.StateChanged += OnStateChanged;
+    }
+
+    private void OnStateChanged() => InvokeAsync(StateHasChanged);
+
+    public void Dispose() => Sheet.StateChanged -= OnStateChanged;
 }

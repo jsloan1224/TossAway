@@ -1,35 +1,104 @@
 @using GridLab.Models
 @using ValueType = GridLab.Models.ValueType
 
-<td class="@CssClass" @onclick="OnClick">
-    @if (Cell.Error is not null)
-    {
-        <span class="cell-error">@Cell.Error</span>
-    }
-    else if (Row.ValueType == ValueType.Text)
-    {
-        @Cell.Value?.ToString()
-    }
-    else if (Cell.Value is double d)
-    {
-        @d.ToString(Row.FormatString)
-    }
-    else
-    {
-        <span>&nbsp;</span>
-    }
-</td>
+@if (_isEditing)
+{
+    <td class="@CssClass">
+        <input @ref="_inputRef"
+               type="text"
+               value="@_editBuffer"
+               @oninput="OnInput"
+               @onkeydown="OnKeyDown"
+               @onblur="CommitEdit"
+               class="cell-edit-input" />
+    </td>
+}
+else
+{
+    <td class="@CssClass" @onclick="OnClick" @ondblclick="EnterEdit">
+        @if (Cell.Error is not null)
+        {
+            <span class="cell-error">@Cell.Error</span>
+        }
+        else if (Row.ValueType == ValueType.Text)
+        {
+            @Cell.Value?.ToString()
+        }
+        else if (Cell.Value is double d)
+        {
+            @d.ToString(Row.FormatString)
+        }
+        else
+        {
+            <span>&nbsp;</span>
+        }
+    </td>
+}
 
 @code {
     [Parameter, EditorRequired] public TemplateRow Row { get; set; } = null!;
     [Parameter, EditorRequired] public CellState Cell { get; set; } = null!;
     [Parameter] public bool IsSelected { get; set; }
+    [Parameter] public bool IsEditing { get; set; }
     [Parameter] public EventCallback OnSelect { get; set; }
+    [Parameter] public EventCallback<object?> OnCommit { get; set; }
+
+    private bool _isEditing;
+    private string _editBuffer = "";
+    private ElementReference _inputRef;
+
+    protected override void OnParametersSet()
+    {
+        // External IsEditing toggle (e.g. Enter/F2 from parent) — not used in step 9
+        // but wired for future formula bar coordination.
+        if (!IsEditing && _isEditing)
+            CancelEdit();
+    }
 
     private string CssClass =>
         (Row.RowType is RowType.Calc or RowType.Total ? "cell-calc" : "cell-input")
         + (IsSelected ? " cell-selected" : "")
         + (Cell.Error is not null ? " cell-error-bg" : "");
 
-    private void OnClick() => OnSelect.InvokeAsync();
+    private void OnClick() => _ = OnSelect.InvokeAsync();
+
+    private async Task EnterEdit()
+    {
+        if (Row.RowType is not RowType.Input) return;
+        await OnSelect.InvokeAsync();
+        _editBuffer = Cell.Value?.ToString() ?? "";
+        _isEditing = true;
+        await Task.Yield();
+        await _inputRef.FocusAsync();
+    }
+
+    private void OnInput(ChangeEventArgs e) => _editBuffer = e.Value?.ToString() ?? "";
+
+    private async Task OnKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter") await CommitEdit();
+        else if (e.Key == "Escape") CancelEdit();
+    }
+
+    private async Task CommitEdit()
+    {
+        if (!_isEditing) return;
+        _isEditing = false;
+
+        object? parsed = Row.ValueType switch
+        {
+            ValueType.Number  => double.TryParse(_editBuffer, out var d) ? d : (object?)null,
+            ValueType.Percent => double.TryParse(_editBuffer.TrimEnd('%', ' '), out var p) ? p / 100.0 : (object?)null,
+            ValueType.Text    => _editBuffer,
+            _                 => _editBuffer
+        };
+
+        await OnCommit.InvokeAsync(parsed ?? (Row.ValueType == ValueType.Text ? (object?)_editBuffer : null));
+    }
+
+    private void CancelEdit()
+    {
+        _isEditing = false;
+        _editBuffer = "";
+    }
 }

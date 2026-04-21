@@ -82,3 +82,5 @@ h1:focus {
 .formula-bar .cell-label { font-weight: bold; min-width: 160px; font-size: 0.85rem; color: #555; }
 .formula-bar .equals-sign { color: #888; }
 .formula-bar input { flex: 1; padding: 4px 6px; border: 1px solid #aaa; font-family: monospace; font-size: 0.9rem; }
+
+.cell-edit-input { width: 100%; padding: 2px 4px; border: none; outline: 1px solid #0078d4; font-family: monospace; font-size: 0.9rem; background: #fffbe6; }

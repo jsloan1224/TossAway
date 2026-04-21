@@ -15,6 +15,8 @@
         {
             var cell = Sheet.Cells[row.RowKey];
             var indent = row.IndentLevel > 0 ? $"padding-left: {row.IndentLevel * 1.5}em" : "";
+            var rowKey = row.RowKey; // capture for lambda
+
             <tr class="@(SelectedRowKey == row.RowKey ? "row-selected" : "")">
                 <td class="col-name" style="@indent">
                     @row.DisplayName
@@ -26,7 +28,8 @@
                 <SheetCell Row="row"
                            Cell="cell"
                            IsSelected="SelectedRowKey == row.RowKey"
-                           OnSelect="@(() => OnSelectRow.InvokeAsync(row.RowKey))" />
+                           OnSelect="@(() => OnSelectRow.InvokeAsync(rowKey))"
+                           OnCommit="@(val => OnCellCommit(rowKey, val))" />
             </tr>
         }
     }
@@ -37,4 +40,9 @@
     [Parameter, EditorRequired] public SheetState Sheet { get; set; } = null!;
     [Parameter] public string? SelectedRowKey { get; set; }
     [Parameter] public EventCallback<string> OnSelectRow { get; set; }
+
+    private void OnCellCommit(string rowKey, object? value)
+    {
+        Sheet.SetInputValue(rowKey, value);
+    }
 }
