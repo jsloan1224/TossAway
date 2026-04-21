@@ -58,3 +58,27 @@ h1:focus {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
+/* GridLab sheet styles */
+.sheet-container { padding: 1rem; }
+
+.sheet-grid { border-collapse: collapse; font-family: monospace; font-size: 0.9rem; }
+.sheet-grid td { padding: 4px 10px; border: 1px solid #ccc; }
+
+.col-name { min-width: 180px; background: #f5f5f5; font-weight: 500; }
+
+.cell-input { background: #fff; min-width: 120px; cursor: pointer; }
+.cell-calc  { background: #efefef; min-width: 120px; color: #333; }
+
+.cell-selected { outline: 2px solid #0078d4; outline-offset: -2px; }
+.cell-error { color: red; }
+.cell-error-bg { background: #fff0f0; }
+
+.row-header td { background: #d0e4f5; font-weight: bold; font-size: 0.85rem; letter-spacing: 0.03em; }
+.row-selected .col-name { background: #e5f0ff; }
+
+.override-indicator { color: #e67e00; margin-left: 4px; font-size: 0.6rem; vertical-align: super; }
+
+.formula-bar { display: flex; align-items: center; gap: 8px; padding: 6px 0 10px 0; font-family: monospace; }
+.formula-bar .cell-label { font-weight: bold; min-width: 160px; font-size: 0.85rem; color: #555; }
+.formula-bar .equals-sign { color: #888; }
+.formula-bar input { flex: 1; padding: 4px 6px; border: 1px solid #aaa; font-family: monospace; font-size: 0.9rem; }

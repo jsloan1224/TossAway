@@ -1,0 +1,40 @@
+@using GridLab.Models
+@using GridLab.Services
+
+<table class="sheet-grid">
+    <tbody>
+    @foreach (var row in Sheet.Rows)
+    {
+        if (row.RowType == RowType.Header)
+        {
+            <tr class="row-header">
+                <td colspan="2">@row.DisplayName</td>
+            </tr>
+        }
+        else
+        {
+            var cell = Sheet.Cells[row.RowKey];
+            var indent = row.IndentLevel > 0 ? $"padding-left: {row.IndentLevel * 1.5}em" : "";
+            <tr class="@(SelectedRowKey == row.RowKey ? "row-selected" : "")">
+                <td class="col-name" style="@indent">
+                    @row.DisplayName
+                    @if (cell.FormulaOverride is not null)
+                    {
+                        <span class="override-indicator" title="Formula overridden">●</span>
+                    }
+                </td>
+                <SheetCell Row="row"
+                           Cell="cell"
+                           IsSelected="SelectedRowKey == row.RowKey"
+                           OnSelect="@(() => OnSelectRow.InvokeAsync(row.RowKey))" />
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+
+@code {
+    [Parameter, EditorRequired] public SheetState Sheet { get; set; } = null!;
+    [Parameter] public string? SelectedRowKey { get; set; }
+    [Parameter] public EventCallback<string> OnSelectRow { get; set; }
+}

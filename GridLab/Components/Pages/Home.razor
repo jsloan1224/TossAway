@@ -1,14 +1,17 @@
 @page "/"
+@rendermode InteractiveServer
 @using GridLab.Services
+@using GridLab.Components.Grid
 @inject SheetState Sheet
 
-<PageTitle>SheetState Smoke Test</PageTitle>
+<PageTitle>GridLab</PageTitle>
 
-<h2>SheetState — initial recalc</h2>
-<ul>
-@foreach (var row in Sheet.Rows)
-{
-    var cell = Sheet.Cells[row.RowKey];
-    <li>@row.RowKey: @(cell.Error is not null ? $"ERROR: {cell.Error}" : cell.Value?.ToString())</li>
+<div class="sheet-container">
+    <SheetGrid Sheet="Sheet"
+               SelectedRowKey="_selectedRowKey"
+               OnSelectRow="@(key => _selectedRowKey = key)" />
+</div>
+
+@code {
+    private string? _selectedRowKey;
 }
-</ul>

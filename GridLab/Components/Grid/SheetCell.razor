@@ -1,0 +1,35 @@
+@using GridLab.Models
+@using ValueType = GridLab.Models.ValueType
+
+<td class="@CssClass" @onclick="OnClick">
+    @if (Cell.Error is not null)
+    {
+        <span class="cell-error">@Cell.Error</span>
+    }
+    else if (Row.ValueType == ValueType.Text)
+    {
+        @Cell.Value?.ToString()
+    }
+    else if (Cell.Value is double d)
+    {
+        @d.ToString(Row.FormatString)
+    }
+    else
+    {
+        <span>&nbsp;</span>
+    }
+</td>
+
+@code {
+    [Parameter, EditorRequired] public TemplateRow Row { get; set; } = null!;
+    [Parameter, EditorRequired] public CellState Cell { get; set; } = null!;
+    [Parameter] public bool IsSelected { get; set; }
+    [Parameter] public EventCallback OnSelect { get; set; }
+
+    private string CssClass =>
+        (Row.RowType is RowType.Calc or RowType.Total ? "cell-calc" : "cell-input")
+        + (IsSelected ? " cell-selected" : "")
+        + (Cell.Error is not null ? " cell-error-bg" : "");
+
+    private void OnClick() => OnSelect.InvokeAsync();
+}
