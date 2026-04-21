@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GridLab")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2af2be5c20f290fba9ea1891b52cb7d6269e4e4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c2c50376275f1382adb1fc9eddf1ff5899c80ce")]
 [assembly: System.Reflection.AssemblyProductAttribute("GridLab")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GridLab")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
