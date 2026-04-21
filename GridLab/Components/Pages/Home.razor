@@ -1,5 +1,6 @@
 @page "/"
 @rendermode InteractiveServer
+@using GridLab.Models
 @using GridLab.Services
 @using GridLab.Components.Grid
 @inject SheetState Sheet
@@ -8,17 +9,43 @@
 <PageTitle>GridLab</PageTitle>
 
 <div class="sheet-container">
+    <FormulaBar SelectedRow="_selectedRow"
+                EffectiveFormula="@(_selectedRow is not null ? Sheet.GetEffectiveFormula(_selectedRow.RowKey) : null)"
+                SelectedCell="@(_selectedRow is not null ? Sheet.Cells[_selectedRow.RowKey] : null)"
+                OnFormulaCommit="OnFormulaCommit"
+                OnValueCommit="OnValueCommit" />
+
     <SheetGrid Sheet="Sheet"
                SelectedRowKey="_selectedRowKey"
-               OnSelectRow="@(key => { _selectedRowKey = key; StateHasChanged(); })" />
+               OnSelectRow="OnSelectRow" />
 </div>
 
 @code {
     private string? _selectedRowKey;
+    private TemplateRow? _selectedRow;
 
     protected override void OnInitialized()
     {
         Sheet.StateChanged += OnStateChanged;
+    }
+
+    private void OnSelectRow(string key)
+    {
+        _selectedRowKey = key;
+        _selectedRow = Sheet.Rows.FirstOrDefault(r => r.RowKey == key);
+        StateHasChanged();
+    }
+
+    private void OnFormulaCommit(string? formula)
+    {
+        if (_selectedRowKey is null) return;
+        Sheet.SetFormulaOverride(_selectedRowKey, formula);
+    }
+
+    private void OnValueCommit(object? value)
+    {
+        if (_selectedRowKey is null) return;
+        Sheet.SetInputValue(_selectedRowKey, value);
     }
 
     private void OnStateChanged() => InvokeAsync(StateHasChanged);

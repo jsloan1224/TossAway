@@ -1,0 +1,98 @@
+@using GridLab.Models
+@using GridLab.Services
+@using ValueType = GridLab.Models.ValueType
+
+<div class="formula-bar">
+    <span class="cell-label">
+        @if (SelectedRow is not null)
+        {
+            @($"[{SelectedRow.DisplayName}]")
+        }
+    </span>
+
+    @if (SelectedRow is not null && SelectedRow.RowType is RowType.Calc or RowType.Total)
+    {
+        <span class="equals-sign">=</span>
+        <input type="text"
+               value="@_buffer"
+               @oninput="OnInput"
+               @onkeydown="OnKeyDown"
+               @onblur="Commit"
+               placeholder="formula…" />
+    }
+    else if (SelectedRow is not null && SelectedRow.RowType == RowType.Input)
+    {
+        <input type="text"
+               value="@_buffer"
+               @oninput="OnInput"
+               @onkeydown="OnKeyDown"
+               @onblur="Commit"
+               placeholder="value…" />
+    }
+    else
+    {
+        <input type="text" disabled placeholder="select a cell" />
+    }
+</div>
+
+@code {
+    [Parameter] public TemplateRow? SelectedRow { get; set; }
+    [Parameter] public string? EffectiveFormula { get; set; }
+    [Parameter] public CellState? SelectedCell { get; set; }
+    [Parameter] public EventCallback<string?> OnFormulaCommit { get; set; }
+    [Parameter] public EventCallback<object?> OnValueCommit { get; set; }
+
+    private string _buffer = "";
+    private string? _lastKey;
+
+    protected override void OnParametersSet()
+    {
+        var newKey = SelectedRow?.RowKey;
+        if (newKey == _lastKey) return;
+        _lastKey = newKey;
+
+        if (SelectedRow is null) { _buffer = ""; return; }
+
+        _buffer = SelectedRow.RowType is RowType.Calc or RowType.Total
+            ? EffectiveFormula ?? ""
+            : SelectedCell?.Value?.ToString() ?? "";
+    }
+
+    private void OnInput(ChangeEventArgs e) => _buffer = e.Value?.ToString() ?? "";
+
+    private async Task OnKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter") await Commit();
+        else if (e.Key == "Escape") Reset();
+    }
+
+    private async Task Commit()
+    {
+        if (SelectedRow is null) return;
+
+        if (SelectedRow.RowType is RowType.Calc or RowType.Total)
+        {
+            var formula = string.IsNullOrWhiteSpace(_buffer) ? null : _buffer.Trim();
+            await OnFormulaCommit.InvokeAsync(formula);
+        }
+        else if (SelectedRow.RowType == RowType.Input)
+        {
+            object? parsed = SelectedRow.ValueType switch
+            {
+                ValueType.Number  => double.TryParse(_buffer, out var d) ? d : (object?)null,
+                ValueType.Percent => double.TryParse(_buffer.TrimEnd('%', ' '), out var p) ? p / 100.0 : (object?)null,
+                ValueType.Text    => _buffer,
+                _                 => _buffer
+            };
+            await OnValueCommit.InvokeAsync(parsed ?? (SelectedRow.ValueType == ValueType.Text ? (object?)_buffer : null));
+        }
+    }
+
+    private void Reset()
+    {
+        if (SelectedRow is null) return;
+        _buffer = SelectedRow.RowType is RowType.Calc or RowType.Total
+            ? EffectiveFormula ?? ""
+            : SelectedCell?.Value?.ToString() ?? "";
+    }
+}
